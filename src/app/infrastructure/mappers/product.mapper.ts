@@ -1,5 +1,5 @@
-import { ProductDTO } from "../../infrastructure/dto/product.dto";
-import { Product } from "../models/product.model";
+import { ProductDTO } from "../dto/product.dto";
+import { Product } from "../../domain/models/product.model";
 
 export class ProductMapper {
     static fromApiToDomain(apiProduct: ProductDTO): Product {
