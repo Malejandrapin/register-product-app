@@ -1,0 +1,35 @@
+<section class="list-panel">
+    <div class="list-heading">
+        <h2>Productos</h2>
+        <span>{{ products().length }}</span>
+    </div>
+    @if (loading() && products().length === 0) {
+    <p class="empty">Cargando productos...</p>
+    } @else if (products().length === 0) {
+    <p class="empty">No hay productos registrados.</p>
+    } @else {
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (product of products(); track product.productId) { <tr>
+                    <td><strong>{{ product.productName }}</strong><small>{{ product.productDescription }}</small></td>
+                    <td>{{ product.productPrice | currency:'COP':'symbol-narrow':'1.0-0' }}</td>
+                    <td>{{ product.productStock }}</td>
+                    <td class="row-actions">
+                        <button type="button" (click)="edit.emit(product)">Editar</button>
+                        <button type="button" class="danger" (click)="remove.emit(product)">Eliminar</button>
+                    </td>
+                </tr> }
+            </tbody>
+        </table>
+    </div>
+    }
+</section>

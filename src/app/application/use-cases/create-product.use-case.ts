@@ -10,6 +10,12 @@ export class CreateProductUseCase {
   private readonly productRepository = inject(ProductRepository);
 
   execute(product: Product): Observable<Product> {
+    if(!product.productName || product.productName.trim().length === 0){
+      throw new Error("Product name cannot be empty");
+    }
+    if(product.productDescription.trim().length < 5){
+      throw new Error("Description must be at least 5 characters");
+    }
     return this.productRepository.createProduct(product);
   }
 }

@@ -1,0 +1,89 @@
+:host {
+    display: block;
+}
+
+.form-panel {
+    background: #ffffff;
+    border: 1px solid #d9e2ec;
+    padding: 1.25rem;
+}
+
+h2 {
+    color: #17212b;
+    font-size: 1.25rem;
+    margin: 0 0 1.25rem;
+}
+
+form,
+.field-row,
+.actions {
+    display: grid;
+    gap: .75rem;
+}
+
+label {
+    color: #334e68;
+    font-size: .875rem;
+    font-weight: 700;
+}
+
+input,
+textarea {
+    border: 1px solid #bcccdc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font: inherit;
+    padding: .65rem;
+    width: 100%;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #0f766e;
+    outline: 2px solid #99f6e4;
+}
+
+.field-row {
+    grid-template-columns: 1fr 1fr;
+}
+
+.field-row div {
+    display: grid;
+    gap: .75rem;
+}
+
+small {
+    color: #be123c;
+}
+
+.actions {
+    grid-template-columns: auto 1fr;
+    margin-top: .5rem;
+}
+
+button {
+    background: #0f766e;
+    border: 0;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    padding: .7rem 1rem;
+}
+
+button:disabled {
+    cursor: wait;
+    opacity: .55;
+}
+
+.secondary {
+    background: #e2e8f0;
+    color: #334e68;
+}
+
+@media (max-width: 420px) {
+    .field-row {
+        grid-template-columns: 1fr;
+    }
+}
