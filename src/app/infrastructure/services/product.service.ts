@@ -10,7 +10,7 @@ import { ProductDTO } from "../dto/product.dto";
 export class ProductService {
     private http = inject(HttpClient);
 
-    private readonly apiURL = 'http://localhost:3001/products';
+    private readonly apiURL = 'http://localhost:3001/productos';
 
     getProducts(): Observable<ProductDTO[]> {
         return this.http.get<ProductDTO[]>(this.apiURL);

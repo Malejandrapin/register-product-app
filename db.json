@@ -1,0 +1,33 @@
+{
+  "productos": [
+    {
+      "id": "UIpEAL5TJe4",
+      "nameProduct": "Esfero",
+      "description": "Esfero con tapa",
+      "price": 1500,
+      "stock": 20
+    },
+    {
+      "id": "J96ZvOnaSoc",
+      "nameProduct": "Lapiz",
+      "description": "Lapiz No 2",
+      "price": 3000,
+      "stock": 12
+    },
+    {
+      "id": "4IIub4hvSrE",
+      "nameProduct": "Celular",
+      "description": "Celular realme",
+      "price": 950000,
+      "stock": 2
+    },
+    {
+      "id": "SPUsg7awvx0",
+      "nameProduct": "Cuaderno",
+      "description": "Pasta dura",
+      "price": 3500,
+      "stock": 3
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -1,0 +1,26 @@
+<section class="form-panel">
+    <h2>{{ product() ? 'Editar producto' : 'Nuevo producto' }}</h2>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <label for="nameProduct">Nombre producto</label><input id="nameProduct" formControlName="nameProduct"
+            type="text" />
+        @if (form.controls.nameProduct.touched && form.controls.nameProduct.invalid) {
+        <small>El nombre es obligatorio.</small> }
+        <label for="description">Descripción del producto</label>
+        <textarea id="description" formControlName="description" rows="2"> </textarea>
+        <div class="field-row">
+            <div>
+                <label for="price">Precio</label>
+                <input id="price" formControlName="price" type="number" min="0" />
+            </div>
+            <div>
+                <label for="stock">Stock</label>
+                <input id="stock" formControlName="stock" type="number" min="0" />
+            </div>
+        </div>
+        <div class="actions">
+            @if (product()) {
+            <button type="button" class="secondary" (click)="cancelled.emit()">Cancelar</button> }
+            <button type="submit" [disabled]="disabled()">{{ product() ? 'Actualizar' : 'Guardar' }}</button>
+        </div>
+    </form>
+</section>

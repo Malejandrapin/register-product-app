@@ -1,0 +1,14 @@
+<main class="page-shell">
+    <header class="page-header">
+        <h1>Registro de productos</h1>
+        <p>CRUD para registro de productos</p>
+    </header>
+    @if (error()) {
+    <p class="alert" role="alert">{{ error() }}</p> }
+    <section class="content-grid" aria-label="Gestión de productos">
+        <app-product-form [product]="selectedProduct()" [disabled]="loading()" (saved)="saveProduct($event)"
+            (cancelled)="cancelEdit()" />
+        <app-product-list [products]="products()" [loading]="loading()" (edit)="editProduct($event)"
+            (remove)="removeProduct($event)" />
+    </section>
+</main>
