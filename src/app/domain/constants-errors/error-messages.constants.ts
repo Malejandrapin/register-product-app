@@ -1,0 +1,15 @@
+export const ERROR_MESSAGES = {
+    productNameRequired: 'Product name is required.',
+    productNameMinLength: 'Product name must be at least 3 characters.',
+    productNameContainsNumbers: 'Product name cannot contain numbers.',
+    productDescriptionRequired: 'Product description is required.',
+    productDescriptionMinLength: 'Product description must be at least 5 characters.',
+    productPriceRequired: 'Product price is required.',
+    productPriceMustBePositive: 'Product price must be greater than 0.',
+    productStockRequired: 'Product stock is required.',
+    productStockMustBePositive: 'Product stock must be greater than 0.',
+    invalidProduct: 'Product data is invalid.',
+    loadProductsFailed: 'Products could not be loaded.',
+    saveProductFailed: 'It was not possible to save the product.',
+    deleteProductFailed: 'It was not possible to delete the product.',
+} as const;

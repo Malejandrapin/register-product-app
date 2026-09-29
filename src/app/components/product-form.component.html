@@ -3,20 +3,42 @@
     <form [formGroup]="form" (ngSubmit)="submit()">
         <label for="nameProduct">Nombre producto</label><input id="nameProduct" formControlName="nameProduct"
             type="text" />
-        @if (form.controls.nameProduct.touched && form.controls.nameProduct.invalid) {
-        <small>El nombre es obligatorio.</small> }
+        @if (form.controls.nameProduct.touched && form.controls.nameProduct.errors; as errors) {
+        @if (errors['required']) {
+        <small role="alert">{{ errorMessages.productNameRequired }}</small>
+        } @else if (errors['minlength']) {
+        <small role="alert">{{ errorMessages.productNameMinLength }}</small>
+        } @else if (errors['pattern']) {
+        <small role="alert">{{ errorMessages.productNameContainsNumbers }}</small>
+        } }
         <label for="description">Descripción del producto</label>
         <textarea id="description" formControlName="description" rows="2"> </textarea>
-        @if (form.controls.description.touched && form.controls.description.invalid) {
-        <small>La descripción debe tener al menos 5 caracteres.</small> }
+        @if (form.controls.description.touched && form.controls.description.errors; as errors) {
+        @if (errors['required']) {
+        <small role="alert">{{ errorMessages.productDescriptionRequired }}</small>
+        } @else if (errors['minlength']) {
+        <small role="alert">{{ errorMessages.productDescriptionMinLength }}</small>
+        } }
         <div class="field-row">
             <div>
                 <label for="price">Precio</label>
                 <input id="price" formControlName="price" type="number" min="0" />
+                @if (form.controls.price.touched && form.controls.price.errors; as errors) {
+                @if (errors['required']) {
+                <small role="alert">{{ errorMessages.productPriceRequired }}</small>
+                } @else if (errors['min']) {
+                <small role="alert">{{ errorMessages.productPriceMustBePositive }}</small>
+                } }
             </div>
             <div>
                 <label for="stock">Stock</label>
                 <input id="stock" formControlName="stock" type="number" min="0" />
+                @if (form.controls.stock.touched && form.controls.stock.errors; as errors) {
+                @if (errors['required']) {
+                <small role="alert">{{ errorMessages.productStockRequired }}</small>
+                } @else if (errors['min']) {
+                <small role="alert">{{ errorMessages.productStockMustBePositive }}</small>
+                } }
             </div>
         </div>
         <div class="actions">

@@ -7,6 +7,7 @@ import { UpdateProductUseCase } from '../application/use-cases/update-product.us
 import { Product } from '../domain/models/product.model';
 import { ProductFormComponent, ProductFormValue } from './product-form.component';
 import { ProductListComponent } from './product-list.component';
+import { ERROR_MESSAGES } from '../domain/constants-errors/error-messages.constants';
 
 @Component({
     selector: 'app-products-page',
@@ -32,25 +33,31 @@ export class ProductsPageComponent {
         this.error.set('');
         this.getProducts.execute().pipe(finalize(() => this.loading.set(false))).subscribe({
             next: (products) => this.products.set(products),
-            error: () => this.error.set('No fue posible cargar los productos.'),
+            error: () => this.error.set(ERROR_MESSAGES.loadProductsFailed),
         });
     }
 
     saveProduct(value: ProductFormValue): void {
         const selected = this.selectedProduct();
-        const product = new Product(selected?.productId ?? 0, value.nameProduct, value.description, value.price, value.stock);
+        let product: Product;
+        try {
+            product = new Product(selected?.productId ?? 0, value.nameProduct, value.description, value.price, value.stock);
+        } catch (error) {
+            this.error.set(error instanceof Error ? error.message : ERROR_MESSAGES.invalidProduct);
+            return;
+        }
         this.loading.set(true);
         this.error.set('');
         if (selected) {
             this.updateProduct.execute(product).pipe(finalize(() => this.loading.set(false))).subscribe({
                 next: () => this.finishSave(),
-                error: () => this.error.set('No fue posible guardar el producto.'),
+                error: () => this.error.set(ERROR_MESSAGES.saveProductFailed),
             });
             return;
         }
         this.createProduct.execute(product).pipe(finalize(() => this.loading.set(false))).subscribe({
             next: () => this.finishSave(),
-            error: () => this.error.set('No fue posible guardar el producto.'),
+            error: () => this.error.set(ERROR_MESSAGES.saveProductFailed),
         });
     }
 
@@ -68,7 +75,7 @@ export class ProductsPageComponent {
         this.error.set('');
         this.deleteProduct.execute(product.productId).pipe(finalize(() => this.loading.set(false))).subscribe({
             next: () => this.loadProducts(),
-            error: () => this.error.set('No fue posible eliminar el producto.'),
+            error: () => this.error.set(ERROR_MESSAGES.deleteProductFailed),
         });
     }
 

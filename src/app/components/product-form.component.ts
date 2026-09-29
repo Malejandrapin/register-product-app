@@ -1,6 +1,7 @@
 import { Component, effect, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Product } from '../domain/models/product.model';
+import { ERROR_MESSAGES } from '../domain/constants-errors/error-messages.constants';
 
 export interface ProductFormValue {
     nameProduct: string;
@@ -16,16 +17,17 @@ export interface ProductFormValue {
     styleUrl: './product-form.component.scss'
 })
 export class ProductFormComponent {
+    readonly errorMessages = ERROR_MESSAGES;
     readonly product = input<Product | null>(null);
     readonly resetVersion = input(0);
     readonly disabled = input(false);
     readonly saved = output<ProductFormValue>();
     readonly cancelled = output<void>();
     readonly form = new FormGroup({
-        nameProduct: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+        nameProduct: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(3), Validators.pattern(/^[^\d]*$/)] }),
         description: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(5)] }),
-        price: new FormControl<number | null>(null, { validators: [Validators.required, Validators.min(0)] }),
-        stock: new FormControl<number | null>(null, { validators: [Validators.required, Validators.min(0)] }),
+        price: new FormControl<number | null>(null, { validators: [Validators.required, Validators.min(Number.MIN_VALUE)] }),
+        stock: new FormControl<number | null>(null, { validators: [Validators.required, Validators.min(Number.MIN_VALUE)] }),
     });
 
     constructor() {
